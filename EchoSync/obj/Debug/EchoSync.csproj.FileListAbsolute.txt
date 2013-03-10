@@ -1,0 +1,1 @@
+c:\users\james\documents\visual studio 2012\Projects\EchoSync\EchoSync\bin\Debug\EchoSync.exe.config
