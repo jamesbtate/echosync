@@ -1,1 +1,9 @@
 c:\users\james\documents\visual studio 2012\Projects\EchoSync\EchoSync\bin\Debug\EchoSync.exe.config
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\bin\Debug\EchoSync.exe.config
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\bin\Debug\EchoSync.exe
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\bin\Debug\EchoSync.pdb
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.csprojResolveAssemblyReference.cache
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.Properties.Resources.resources
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.csproj.GenerateResource.Cache
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.exe
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.pdb
