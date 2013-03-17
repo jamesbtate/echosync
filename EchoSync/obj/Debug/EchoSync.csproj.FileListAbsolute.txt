@@ -14,3 +14,5 @@ C:\Users\James\documents\visual studio 2012\Projects\EchoSync\EchoSync\obj\Debug
 C:\Users\James\documents\visual studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.csproj.GenerateResource.Cache
 C:\Users\James\documents\visual studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.exe
 C:\Users\James\documents\visual studio 2012\Projects\EchoSync\EchoSync\obj\Debug\EchoSync.pdb
+C:\Users\James\documents\visual studio 2012\Projects\EchoSync\EchoSync\bin\Debug\SharedLibrary.dll
+C:\Users\James\documents\visual studio 2012\Projects\EchoSync\EchoSync\bin\Debug\SharedLibrary.pdb

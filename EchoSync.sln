@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoSync", "EchoSync\EchoSync.csproj", "{C6EBE1B4-2B1C-40E5-AFEC-47AECE0C2662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestService", "TestService\TestService.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWCFLibrary", "TestWCFLibrary\TestWCFLibrary.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestService", "TestService\TestService.csproj", "{4DCABFA1-6C52-4B32-81CF-3D50DC5C693B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{871B18F0-EEE6-49AD-A0DA-0AE00B4AB832}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,14 @@ Global
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DCABFA1-6C52-4B32-81CF-3D50DC5C693B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DCABFA1-6C52-4B32-81CF-3D50DC5C693B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DCABFA1-6C52-4B32-81CF-3D50DC5C693B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DCABFA1-6C52-4B32-81CF-3D50DC5C693B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{871B18F0-EEE6-49AD-A0DA-0AE00B4AB832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{871B18F0-EEE6-49AD-A0DA-0AE00B4AB832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{871B18F0-EEE6-49AD-A0DA-0AE00B4AB832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{871B18F0-EEE6-49AD-A0DA-0AE00B4AB832}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
