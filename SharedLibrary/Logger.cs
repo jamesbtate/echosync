@@ -112,6 +112,12 @@ namespace SharedLibrary
         {
             Logger.Log(s, LogLevel.DEBUG2, memberName, sourceFilePath, sourceLineNumber);
         }
+        public static void Debug2([CallerMemberName] string memberName = "",
+            [CallerFilePath] string sourceFilePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Logger.Log("", LogLevel.DEBUG2, memberName, sourceFilePath, sourceLineNumber);
+        }
 
         /// <summary>
         /// Logs a string to the log file. Prepends the log entry with the date, time and level followed by a space and appends with a newline.
@@ -126,7 +132,14 @@ namespace SharedLibrary
             String dateString = DateTime.Now.ToString();
             FileInfo fi = new FileInfo(sourceFilePath);
             String path = fi.Directory.Name + '\\' + fi.Name;
-            writer.WriteLine(dateString + " " + level + " " + memberName + "() " + path + ':' + sourceLineNumber + " " + s);
+            if (s.Equals(""))
+            {
+                writer.WriteLine(dateString + " " + level + " " + memberName + "() " + path + ':' + sourceLineNumber + " " + s);
+            }
+            else
+            {
+                writer.WriteLine(dateString + " " + level + " " + memberName + "() " + path + ':' + sourceLineNumber);
+            }
             Logger.Flush();
         }
 
