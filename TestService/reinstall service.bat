@@ -6,7 +6,7 @@ REM set PATH=%PATH%;%DOTNETFX2%
 
 echo Re-Installing EchoBackupService...
 echo ---------------------------------------------------
-"uninstall service.bat"
-"install service.bat"
+call "uninstall service.bat"
+call "install service.bat"
 echo ---------------------------------------------------
 echo Done reinstall.
