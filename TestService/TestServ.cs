@@ -27,7 +27,7 @@ namespace TestService
 
         protected override void OnStart(string[] args)
         {
-            Logger.Init();
+            Logger.Init("C:\\Temp\\service.log");
             Logger.Log("");
             if (serviceHost != null)
             {

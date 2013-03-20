@@ -16,13 +16,17 @@ namespace EchoSync
         [STAThread]
         static void Main()
         {
-            Logger.Init();
+            Logger.Init("C:\\Temp\\application.log");
             Logger.Log("first log message");
             smallFunc();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form1 f = new Form1();
+            f.Initi
+            //Application.Run(f);
+            Console.Out.WriteLine("line");
+            f.textBox1.Text = "test string 1";
         }
 
         static public void smallFunc()
