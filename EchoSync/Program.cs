@@ -9,7 +9,7 @@ namespace EchoSync
 {
     static class Program
     {
-        static int x;
+        //static int x;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,8 +23,8 @@ namespace EchoSync
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form1 f = new Form1();
-            f.Initi
-            //Application.Run(f);
+            //f.Initi
+            Application.Run(f);
             Console.Out.WriteLine("line");
             f.textBox1.Text = "test string 1";
         }
@@ -32,8 +32,9 @@ namespace EchoSync
         static public void smallFunc()
         {
             Logger.Log("");
-            x = 5 + 4;
-            x--;
+            TestLibInterfaceClient client = new TestLibInterfaceClient();
+            string s = client.GetData(4);
+            Logger.Log(s);
         }
     }
 }

@@ -1,0 +1,5 @@
+F:\James\My Documents\Visual Studio 2012\Projects\EchoSync\EchoSync>svcutil /lan
+guage:csharp /out:ClientCode.cs /config:app.config http://localhost:8000/TestSer
+vice/Testlib/Service/svc?wsdl
+
+svcutil /language:csharp /out:ClientCode.cs /config:app.config http://localhost:8000/TestService/Testlib

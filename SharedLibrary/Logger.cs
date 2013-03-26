@@ -132,7 +132,7 @@ namespace SharedLibrary
             String dateString = DateTime.Now.ToString();
             FileInfo fi = new FileInfo(sourceFilePath);
             String path = fi.Directory.Name + '\\' + fi.Name;
-            if (s.Equals(""))
+            if (!s.Equals(""))
             {
                 writer.WriteLine(dateString + " " + level + " " + memberName + "() " + path + ':' + sourceLineNumber + " " + s);
             }

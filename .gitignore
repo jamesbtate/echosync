@@ -109,3 +109,4 @@ Backup*/
 UpgradeLog*.XML
 EchoSync/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 EchoSync/obj/Debug/EchoSync.csproj.FileListAbsolute.txt
+EchoSync/obj/Debug/DesignTimeResolveAssemblyReferences.cache
