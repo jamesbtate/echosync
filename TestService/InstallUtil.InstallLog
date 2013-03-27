@@ -232,3 +232,74 @@ The file is located at F:\James\My Documents\Visual Studio 2012\Projects\EchoSyn
 The Commit phase completed successfully.
 
 The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+An exception occurred during the Install phase.
+System.InvalidOperationException: Cannot open Service Control Manager on computer '.'. This operation might require other privileges.
+The inner exception System.ComponentModel.Win32Exception was thrown with the following error message: Access is denied.
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+An exception occurred during the Install phase.
+System.InvalidOperationException: Cannot open Service Control Manager on computer '.'. This operation might require other privileges.
+The inner exception System.ComponentModel.Win32Exception was thrown with the following error message: Access is denied.
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at C:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the c:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at c:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+The uninstall has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the c:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at c:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the c:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.exe assembly's progress.
+The file is located at c:\Users\ODUUser\Documents\Visual Studio 2012\Projects\EchoSync\TestService\bin\Debug\TestService.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.

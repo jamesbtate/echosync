@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharedLibrary;
@@ -10,6 +12,7 @@ namespace EchoSync
     static class Program
     {
         //static int x;
+        private static BackgroundWorker mainBackgroundWorker;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,7 +26,6 @@ namespace EchoSync
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form1 f = new Form1();
-            //f.Initi
             Application.Run(f);
             Console.Out.WriteLine("line");
             f.textBox1.Text = "test string 1";

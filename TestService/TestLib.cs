@@ -17,6 +17,12 @@ namespace TestService
             return string.Format("You entered: {0}", value);
         }
 
+        public long GetTime()
+        {
+            DateTime dt = DateTime.Now;
+            return dt.Ticks;
+        }
+
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
             Logger.Debug2();
