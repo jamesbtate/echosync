@@ -1,0 +1,4 @@
+_IDEAS_
+===========================
+
+1. When a user adds a new device to his or her account, he or she must approve the device using a code sent to the email address on file. This behaviour is similar to Valve's Steam Guard.
