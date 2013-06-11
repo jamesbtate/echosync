@@ -15,6 +15,9 @@ namespace TestService
         string GetData(int value);
 
         [OperationContract]
+        long GetTime();
+
+        [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here

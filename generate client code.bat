@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\svcutil" /language:csharp /out:EchoSync\ClientCode.cs /config:EchoSync\app.config http://localhost:8000/TestService/Testlib
