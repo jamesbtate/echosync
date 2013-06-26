@@ -55,68 +55,69 @@ namespace SharedLibrary
         /// Logs a string to file with the default LogLevel (Logger constant member)
         /// </summary>
         /// <param name="s">The string to be logged</param>
-        public static void Log(String s,
-            [CallerMemberName] string memberName = "",
-            [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+        public static void Log(String s
+            //[CallerMemberName] string memberName = "",
+            //[CallerFilePath] string sourceFilePath = "",
+            //[CallerLineNumber] int sourceLineNumber = 0)
+            )
         {
-            Logger.Log(s, defaultLogLevel, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log(s, defaultLogLevel/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
 
-        public static void Crit(String s,
+        public static void Crit(String s)
+            //[CallerMemberName] string memberName = "",
+            //[CallerFilePath] string sourceFilePath = "",
+            //[CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Logger.Log(s, LogLevel.CRIT/*, memberName, sourceFilePath, sourceLineNumber*/);
+        }
+        public static void Error(String s/*,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
-            Logger.Log(s, LogLevel.CRIT, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log(s, LogLevel.ERROR/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
-        public static void Error(String s,
+        public static void Warn(String s/*,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
-            Logger.Log(s, LogLevel.ERROR, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log(s, LogLevel.WARN/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
-        public static void Warn(String s,
+        public static void Notice(String s/*,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
-            Logger.Log(s, LogLevel.WARN, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log(s, LogLevel.NOTICE/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
-        public static void Notice(String s,
+        public static void Info(String s/*,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
-            Logger.Log(s, LogLevel.NOTICE, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log(s, LogLevel.INFO/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
-        public static void Info(String s,
+        public static void Debug(String s/*,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
-            Logger.Log(s, LogLevel.INFO, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log(s, LogLevel.DEBUG/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
-        public static void Debug(String s,
+        public static void Debug2(String s/*,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
-            Logger.Log(s, LogLevel.DEBUG, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log(s, LogLevel.DEBUG2/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
-        public static void Debug2(String s,
-            [CallerMemberName] string memberName = "",
+        public static void Debug2(/*[CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
-            Logger.Log(s, LogLevel.DEBUG2, memberName, sourceFilePath, sourceLineNumber);
-        }
-        public static void Debug2([CallerMemberName] string memberName = "",
-            [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
-        {
-            Logger.Log("", LogLevel.DEBUG2, memberName, sourceFilePath, sourceLineNumber);
+            Logger.Log("", LogLevel.DEBUG2/*, memberName, sourceFilePath, sourceLineNumber*/);
         }
 
         /// <summary>
@@ -124,21 +125,21 @@ namespace SharedLibrary
         /// </summary>
         /// <param name="s">The string to be logged</param>
         /// <param name="level">The level this messaged should be logged as (enum Logger.LogLevel.*)</param>
-        public static void Log(String s, LogLevel level,
+        public static void Log(String s, LogLevel level/*,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+            [CallerLineNumber] int sourceLineNumber = 0*/)
         {
             String dateString = DateTime.Now.ToString();
-            FileInfo fi = new FileInfo(sourceFilePath);
-            String path = fi.Directory.Name + '\\' + fi.Name;
+            /*FileInfo fi = new FileInfo(sourceFilePath);
+            String path = fi.Directory.Name + '\\' + fi.Name;*/
             if (!s.Equals(""))
             {
-                writer.WriteLine(dateString + " " + level + " " + memberName + "() " + path + ':' + sourceLineNumber + " " + s);
+                writer.WriteLine(dateString + " " + level /*+ " " + memberName + "() " + path + ':' + sourceLineNumber + " " + s*/);
             }
             else
             {
-                writer.WriteLine(dateString + " " + level + " " + memberName + "() " + path + ':' + sourceLineNumber);
+                writer.WriteLine(dateString + " " + level /*+ " " + memberName + "() " + path + ':' + sourceLineNumber*/);
             }
             Logger.Flush();
         }
