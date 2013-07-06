@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDriver", "TestDriver\TestDriver.csproj", "{2DA8061F-3B21-4BAE-B3BD-D245CEFC524E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{42EEC155-BBAB-4DBD-8D59-EE433D58DBFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{2DA8061F-3B21-4BAE-B3BD-D245CEFC524E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DA8061F-3B21-4BAE-B3BD-D245CEFC524E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DA8061F-3B21-4BAE-B3BD-D245CEFC524E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42EEC155-BBAB-4DBD-8D59-EE433D58DBFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42EEC155-BBAB-4DBD-8D59-EE433D58DBFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42EEC155-BBAB-4DBD-8D59-EE433D58DBFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42EEC155-BBAB-4DBD-8D59-EE433D58DBFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
