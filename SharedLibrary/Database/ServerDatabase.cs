@@ -10,9 +10,9 @@ namespace SharedLibrary.Database
     public static class ServerDatabase
     {
         static String connString = "server=128.82.4.29;uid=echosync;pwd=yjPLAjAqu13lVO4l1dw7G74D;database=echosync;";
-        MySqlConnection connection;
+        static MySqlConnection connection;
         
-        void Init()
+        public static void Init()
         {
             try
             {
