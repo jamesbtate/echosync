@@ -33,7 +33,7 @@ namespace Server
             }
         }
 
-        public static void AcceptCallback(IAsyncResult ar)
+        private static void AcceptCallback(IAsyncResult ar)
         {
             //callback code
             Socket handler = ((Socket)ar.AsyncState).EndAccept(ar);

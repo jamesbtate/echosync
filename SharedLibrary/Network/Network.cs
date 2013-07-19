@@ -11,6 +11,8 @@ namespace SharedLibrary.Network
 {
     public class Network
     {
+        public const int SERVER_PORT = 12345;
+
         public static Socket BindTo(IPAddress address, int port)
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -18,6 +20,7 @@ namespace SharedLibrary.Network
             socket.Bind(new IPEndPoint(address, 12345));
             return socket;
         }
+
         public static Socket BindTo(int port)
         {
             return BindTo(IPAddress.Any, 12345);
