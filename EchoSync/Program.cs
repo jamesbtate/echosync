@@ -12,7 +12,7 @@ namespace EchoSync
     static class Program
     {
         //static int x;
-        private static BackgroundWorker mainBackgroundWorker;
+        //private static BackgroundWorker mainBackgroundWorker;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
