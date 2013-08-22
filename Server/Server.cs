@@ -8,24 +8,44 @@ using System.Net.Sockets;
 using System.Net;
 using SharedLibrary.Network;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Server
 {
     class Server
     {
         public const int ServerPort = 17777;
+        private EchoSyncSocket serverSocket;
         static void Main(string[] args)
         {
             Console.WriteLine("=== Running EchoSync Server ===");
-            try{
+            Server s = new Server();
+           
+        }
 
-                Socket serverSocket = Network.BindTo(ServerPort);
-                serverSocket.Listen(5);
-                while (true)
-                {
-                    serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), serverSocket);
-                    
-                }
+        public Server()
+        {
+            try
+            {
+                serverSocket = new EchoSyncSocket();
+                serverSocket.InitServer();
+                Task<EchoSyncSocket> t = serverSocket.AcceptTask(new Object());
+                t.ContinueWith(task => AcceptClient(task.Result));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.ReadKey(false);
+        }
+
+        private void AcceptClient(EchoSyncSocket client)
+        {
+            Console.WriteLine("Server.AcceptClient\t" + client.RemoteEndPoint);
+            try
+            {
+                Task<EchoSyncSocket> t = serverSocket.AcceptTask(new Object());
+                t.ContinueWith(task => AcceptClient(task.Result));
             }
             catch (Exception e)
             {

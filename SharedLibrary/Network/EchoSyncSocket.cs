@@ -16,26 +16,37 @@ using System.Security.Authentication;
 
 namespace SharedLibrary.Network
 {
-    public delegate void AcceptCompletedEventHandler(object sender, AcceptCompletedEventArgs e);
+    //We are currently using the Task-based Asynchronous Pattern (TAP)
+    //http://msdn.microsoft.com/en-us/library/hh873175.aspx
 
+    /* event-based async
+    public delegate void AcceptCompletedEventHandler(object sender, AcceptCompletedEventArgs e);
     public delegate void ReadCompletedEventHandler(object sender, ReadCompletedEventArgs e);
+    */
 
     public class EchoSyncSocket
     {
         private TcpListener listener;
         private TcpClient client;
+        private SslStream sslStream;
         private X509Certificate certificate;
         private bool serverInitialized = false;
 
+        /* event-based async
         private SendOrPostCallback acceptCompletedDelegate;
-
-        private HybridDictionary userStateToLifetime = new HybridDictionary();
+        private HybridDictionary userStateToLifetime = new HybridDictionary(); */
 
         public EchoSyncSocket()
         {
-            InitializeDelegates();
+            //InitializeDelegates();
         }
 
+        public EchoSyncSocket(SslStream sslStream)
+        {
+            this.sslStream = sslStream;
+        }
+
+        /* event-based async
         protected virtual void InitializeDelegates()
         {
             acceptCompletedDelegate = new SendOrPostCallback(AcceptCompletedGateway);
@@ -58,7 +69,7 @@ namespace SharedLibrary.Network
                     userStateToLifetime.Remove(taskId);
                 }
             }
-        }
+        }*/
 
         public void InitServer()
         {
@@ -66,7 +77,7 @@ namespace SharedLibrary.Network
             listener.Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             listener.Start(5);
             //need to set "path" below to a real certificate signed by a self-signed CA.
-            certificate = X509Certificate.CreateFromCertFile("path");
+            certificate = X509Certificate.CreateFromCertFile("..\\..\\..\\server1.echosync.tate2.com.p7b");
             serverInitialized = true;
         }
 
@@ -107,15 +118,20 @@ namespace SharedLibrary.Network
             return -1;
         }
 
-        public SslStream Accept()
+        public EchoSyncSocket Accept()
         {
             if (!serverInitialized) InitServer();
             TcpClient client = listener.AcceptTcpClient();
+            return EchoSyncSocketFromTcpClient(client);
+        }
+
+        private EchoSyncSocket EchoSyncSocketFromTcpClient(TcpClient client)
+        {
             SslStream sslStream = new SslStream(client.GetStream(), false);
             try
             {
                 sslStream.AuthenticateAsServer(certificate, false, SslProtocols.Tls, true);
-                return sslStream;
+                return new EchoSyncSocket(sslStream);
             }
             catch
             {
@@ -123,6 +139,37 @@ namespace SharedLibrary.Network
             }
         }
 
+        public Task<EchoSyncSocket> AcceptTask(object state)
+        {
+            Console.WriteLine("EchoSyncSocket.AcceptTask");
+            var tcs = new TaskCompletionSource<EchoSyncSocket>();
+            listener.BeginAcceptTcpClient(ar =>
+            {
+                try { tcs.SetResult(EchoSyncSocketFromTcpClient(listener.EndAcceptTcpClient(ar))); }
+                catch (Exception exc) { tcs.SetException(exc); }
+            }, state);
+            return tcs.Task;
+        }
+
+        public EndPoint RemoteEndPoint
+        {
+            get { return client.Client.RemoteEndPoint; }
+        }
+        
+
+        /* APM/IAsyncResult Pattern
+        public IAsyncResult BeginAccept(AsyncCallback callback, Object state)
+        {
+            
+        }
+
+        public SslStream EndAccept(IAsyncResult result)
+        {
+
+        }
+        */
+
+        /* event-based async
         public virtual void AcceptAsync(object taskId)
         {
             AsyncOperation asyncOp = AsyncOperationManager.CreateOperation(taskId);
@@ -184,9 +231,8 @@ namespace SharedLibrary.Network
             }
             this.AcceptCompletionMethod(c, e, TaskCancelled(asyncOp.UserSuppliedState), asyncOp);
         }
-
         //public event ReadCompletedEventHandler ReadCompleted;
-        
+        */
 
         public void doStuff()
         {
@@ -194,6 +240,7 @@ namespace SharedLibrary.Network
         }
     }
 
+    /* event-based async
     public class AcceptCompletedEventArgs : AsyncCompletedEventArgs
     {
         private SslStream clientSslStream;
@@ -231,4 +278,5 @@ namespace SharedLibrary.Network
             }
         }
     }
+    */
 }
