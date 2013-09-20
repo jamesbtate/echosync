@@ -29,7 +29,7 @@ namespace SharedLibrary.Network
         private TcpListener listener;
         private TcpClient client;
         private SslStream sslStream;
-        private X509Certificate certificate;
+        private X509Certificate2 certificate;
         private bool serverInitialized = false;
 
         /* event-based async
@@ -73,11 +73,13 @@ namespace SharedLibrary.Network
 
         public void InitServer()
         {
+            Console.WriteLine("InitServer()");
             listener = new TcpListener(IPAddress.Any, Network.SERVER_PORT);
             listener.Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             listener.Start(5);
             //need to set "path" below to a real certificate signed by a self-signed CA.
-            certificate = X509Certificate.CreateFromCertFile("..\\..\\..\\server1.echosync.tate2.com.p7b");
+            //certificate = X509Certificate.CreateFromCertFile("..\\..\\..\\server1.echosync.tate2.com.p7b");
+            certificate = new X509Certificate2("..\\..\\..\\server1.echosync.tate2.com.pfx", "");
             serverInitialized = true;
         }
 
@@ -118,11 +120,22 @@ namespace SharedLibrary.Network
             return -1;
         }
 
-        public EchoSyncSocket Accept()
+        public EchoSyncSocket AcceptEchoSyncSocket()
         {
+            Console.WriteLine("Accept()");
             if (!serverInitialized) InitServer();
             TcpClient client = listener.AcceptTcpClient();
+            Console.WriteLine("New TCP client: " + client.Client.RemoteEndPoint);
             return EchoSyncSocketFromTcpClient(client);
+        }
+
+        public TcpClient Accept()
+        {
+            Console.WriteLine("Accept()");
+            if (!serverInitialized) InitServer();
+            TcpClient client = listener.AcceptTcpClient();
+            Console.WriteLine("New TCP client: " + client.Client.RemoteEndPoint);
+            return client;
         }
 
         private EchoSyncSocket EchoSyncSocketFromTcpClient(TcpClient client)
@@ -133,20 +146,30 @@ namespace SharedLibrary.Network
                 sslStream.AuthenticateAsServer(certificate, false, SslProtocols.Tls, true);
                 return new EchoSyncSocket(sslStream);
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.GetType() + e.Message);
+                sslStream.Close();
                 return null;
             }
         }
 
-        public Task<EchoSyncSocket> AcceptTask(object state)
+        public Task<TcpClient> AcceptTask(object state)
         {
             Console.WriteLine("EchoSyncSocket.AcceptTask");
-            var tcs = new TaskCompletionSource<EchoSyncSocket>();
+            var tcs = new TaskCompletionSource<TcpClient>();
             listener.BeginAcceptTcpClient(ar =>
             {
-                try { tcs.SetResult(EchoSyncSocketFromTcpClient(listener.EndAcceptTcpClient(ar))); }
-                catch (Exception exc) { tcs.SetException(exc); }
+                try
+                {
+                    TcpClient client = listener.EndAcceptTcpClient(ar);
+                    Console.WriteLine("New TCP client: " + client.Client.RemoteEndPoint);
+                    tcs.SetResult(client);
+                }
+                catch (Exception exc)
+                {
+                    tcs.SetException(exc);
+                }
             }, state);
             return tcs.Task;
         }

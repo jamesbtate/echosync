@@ -29,7 +29,8 @@ namespace Server
             {
                 serverSocket = new EchoSyncSocket();
                 serverSocket.InitServer();
-                Task<EchoSyncSocket> t = serverSocket.AcceptTask(new Object());
+                Console.WriteLine("Starting Accept Task...");
+                Task<TcpClient> t = serverSocket.AcceptTask(new Object());
                 t.ContinueWith(task => AcceptClient(task.Result));
             }
             catch (Exception e)
@@ -39,17 +40,14 @@ namespace Server
             Console.ReadKey(false);
         }
 
-        private void AcceptClient(EchoSyncSocket client)
+        private void AcceptClient(TcpClient client)
         {
-            Console.WriteLine("Server.AcceptClient\t" + client.RemoteEndPoint);
-            try
+            Task<TcpClient> t = serverSocket.AcceptTask(new Object());
+            t.ContinueWith(task => AcceptClient(task.Result));
+            if (client != null)
             {
-                Task<EchoSyncSocket> t = serverSocket.AcceptTask(new Object());
-                t.ContinueWith(task => AcceptClient(task.Result));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Server.AcceptClient\t" + client.Client.RemoteEndPoint);
+                //do something with client
             }
         }
 
