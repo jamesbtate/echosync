@@ -29,9 +29,7 @@ namespace Server
             {
                 serverSocket = new EchoSyncSocket();
                 serverSocket.InitServer();
-                Console.WriteLine("Starting Accept Task...");
-                Task<TcpClient> t = serverSocket.AcceptTask(new Object());
-                t.ContinueWith(task => AcceptClient(task.Result));
+                AcceptClient();
             }
             catch (Exception e)
             {
@@ -40,21 +38,24 @@ namespace Server
             Console.ReadKey(false);
         }
 
-        private void AcceptClient(TcpClient client)
+        private void AcceptClient()
         {
             Task<TcpClient> t = serverSocket.AcceptTask(new Object());
-            t.ContinueWith(task => AcceptClient(task.Result));
-            if (client != null)
-            {
-                Console.WriteLine("Server.AcceptClient\t" + client.Client.RemoteEndPoint);
-                //do something with client
-            }
+            t.ContinueWith(task => AcceptClient());
+            AcceptedClient(t.Result);
         }
 
-        private static void AcceptCallback(IAsyncResult ar)
+        private void AcceptedClient(TcpClient client)
         {
-            //callback code
-            Socket handler = ((Socket)ar.AsyncState).EndAccept(ar);
+            Console.WriteLine("Server.AcceptClient\t" + client.Client.RemoteEndPoint);
+            Console.WriteLine("AcceptedClient");
+            EchoSyncSocket ess = serverSocket.EchoSyncSocketFromTcpClient(client);
+            if (ess == null)
+            {
+                //failed to auth as server
+                return;
+            }
+            Console.WriteLine("Authed as server to client: " + ess.RemoteEndPoint);
         }
     }
 }

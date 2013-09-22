@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharedLibrary;
+using SharedLibrary.Network;
 
 namespace EchoSync
 {
@@ -16,19 +17,25 @@ namespace EchoSync
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+        //[STAThread]
         static void Main()
         {
+            //Console.WriteLine("EchoSync");
+            //Console.Out.WriteLine("EchoSync Out");
             Logger.Init("C:\\Temp\\application.log");
             Logger.Log("first log message");
-            smallFunc();
+            //smallFunc();
 
-            Application.EnableVisualStyles();
+            /*Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form1 f = new Form1();
             Application.Run(f);
             Console.Out.WriteLine("line");
-            f.textBox1.Text = "test string 1";
+            f.textBox1.Text = "test string 1";*/
+
+            EchoSyncSocket serverSocket = new EchoSyncSocket();
+            serverSocket.InitClient(Network.SERVER_HOST, Network.SERVER_PORT);
+            Console.ReadKey();
         }
 
         static public void smallFunc()

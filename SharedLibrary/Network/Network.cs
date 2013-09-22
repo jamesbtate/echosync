@@ -12,6 +12,7 @@ namespace SharedLibrary.Network
     public class Network
     {
         public const int SERVER_PORT = 12345;
+        public const string SERVER_HOST = "localhost";
 
         public static Socket BindTo(IPAddress address, int port)
         {

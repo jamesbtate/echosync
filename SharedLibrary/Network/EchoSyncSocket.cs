@@ -83,20 +83,19 @@ namespace SharedLibrary.Network
             serverInitialized = true;
         }
 
-        public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        /*public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             if (sslPolicyErrors == SslPolicyErrors.None)
                 return true;
 
             Console.WriteLine("Certificate error: {0}", sslPolicyErrors);
             return false;
-        }
+        }*/
 
         public SslStream InitClient(string host, int port)
         {
             client = new TcpClient(host, port);
-            //need to figure out how to manually set the CA for the next line so that I can trust my self-signed CA without adding certs to the machine store.
-            SslStream sslStream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+            SslStream sslStream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(Security.ManuallyVerifyCA), null);
             try
             {
                 sslStream.AuthenticateAsClient(host);
@@ -112,6 +111,7 @@ namespace SharedLibrary.Network
                 client.Close();
                 return null;
             }
+            Console.WriteLine("Successfully established TLS");
             return sslStream;
         }
 
@@ -138,7 +138,7 @@ namespace SharedLibrary.Network
             return client;
         }
 
-        private EchoSyncSocket EchoSyncSocketFromTcpClient(TcpClient client)
+        public EchoSyncSocket EchoSyncSocketFromTcpClient(TcpClient client)
         {
             SslStream sslStream = new SslStream(client.GetStream(), false);
             try
@@ -149,7 +149,7 @@ namespace SharedLibrary.Network
             catch (Exception e)
             {
                 Console.WriteLine(e.GetType() + e.Message);
-                sslStream.Close();
+                if (sslStream != null) sslStream.Close();
                 return null;
             }
         }
@@ -171,6 +171,15 @@ namespace SharedLibrary.Network
                     tcs.SetException(exc);
                 }
             }, state);
+            return tcs.Task;
+        }
+
+        public Task<EchoSyncSocket> EchoSyncSocketFromTcpClientTask(object state, TcpClient client)
+        {
+            Console.WriteLine("EchoSyncSocket.EchoSyncSocketFromTcpClientTask");
+            var tcs = new TaskCompletionSource<EchoSyncSocket>();
+            EchoSyncSocket ess = EchoSyncSocketFromTcpClient(client);
+            tcs.SetResult(ess);
             return tcs.Task;
         }
 
