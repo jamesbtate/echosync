@@ -35,7 +35,12 @@ namespace EchoSync
 
             EchoSyncSocket serverSocket = new EchoSyncSocket();
             serverSocket.InitClient(Network.SERVER_HOST, Network.SERVER_PORT);
-            Console.ReadKey();
+            while (true)
+            {
+                String line = Console.ReadLine();
+                if (line == "") break;
+                serverSocket.Write(line);
+            }
         }
 
         static public void smallFunc()

@@ -48,11 +48,11 @@ namespace Server
         private void AcceptedClient(TcpClient client)
         {
             Console.WriteLine("Server.AcceptClient\t" + client.Client.RemoteEndPoint);
-            Console.WriteLine("AcceptedClient");
             EchoSyncSocket ess = serverSocket.EchoSyncSocketFromTcpClient(client);
+            Console.WriteLine("AcceptedClient77");
             if (ess == null)
             {
-                //failed to auth as server
+                Console.WriteLine("failed to auth as server");
                 return;
             }
             Console.WriteLine("Authed as server to client: " + ess.RemoteEndPoint);
