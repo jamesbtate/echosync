@@ -41,9 +41,10 @@ namespace SharedLibrary.Network
             //InitializeDelegates();
         }
 
-        public EchoSyncSocket(SslStream sslStream)
+        public EchoSyncSocket(SslStream sslStream, TcpClient client)
         {
             this.sslStream = sslStream;
+            this.client = client;
         }
 
         /* event-based async
@@ -95,7 +96,7 @@ namespace SharedLibrary.Network
         public SslStream InitClient(string host, int port)
         {
             client = new TcpClient(host, port);
-            SslStream sslStream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(Security.ManuallyVerifyCA), null);
+            sslStream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(Security.ManuallyVerifyCA), null);
             try
             {
                 sslStream.AuthenticateAsClient(host);
@@ -117,7 +118,12 @@ namespace SharedLibrary.Network
 
         public int Read(byte[] buffer, int offset, int count)
         {
-            return -1;
+            return sslStream.Read(buffer, offset, count);
+        }
+
+        public void Write(byte[] buffer, int offset, int count)
+        {
+            sslStream.Write(buffer, offset, count);
         }
 
         public EchoSyncSocket AcceptEchoSyncSocket()
@@ -140,11 +146,14 @@ namespace SharedLibrary.Network
 
         public EchoSyncSocket EchoSyncSocketFromTcpClient(TcpClient client)
         {
+            Console.WriteLine("EchoSyncSocketFromTcpClient");
             SslStream sslStream = new SslStream(client.GetStream(), false);
+            Console.WriteLine("about to auth as server");
             try
             {
                 sslStream.AuthenticateAsServer(certificate, false, SslProtocols.Tls, true);
-                return new EchoSyncSocket(sslStream);
+                Console.WriteLine("authed as server. returning ESS.");
+                return new EchoSyncSocket(sslStream, client);
             }
             catch (Exception e)
             {

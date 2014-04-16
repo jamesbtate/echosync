@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text;
 using System.Windows.Forms;
 using SharedLibrary;
 using SharedLibrary.Network;
@@ -39,7 +40,9 @@ namespace EchoSync
             {
                 String line = Console.ReadLine();
                 if (line == "") break;
-                serverSocket.Write(line);
+                byte[] msg = System.Text.Encoding.UTF8.GetBytes(line);
+                Console.Write(msg);
+                serverSocket.Write(msg, 0, msg.Length);
             }
         }
 
