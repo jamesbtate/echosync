@@ -31,6 +31,14 @@ namespace SharedLibrary.Network
         private SslStream sslStream;
         private X509Certificate2 certificate;
         private bool serverInitialized = false;
+        private readonly string username;
+        //the unique user/account identifier
+        public string Username
+        { get { return username; } }
+        private readonly Guid guid;
+        //the unique computer/host identifier
+        public Guid Guid
+        { get { return guid; } }
 
         /* event-based async
         private SendOrPostCallback acceptCompletedDelegate;

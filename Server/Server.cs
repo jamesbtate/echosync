@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
@@ -16,6 +17,7 @@ namespace Server
     {
         public const int ServerPort = 17777;
         private EchoSyncSocket serverSocket;
+        private List<EchoSyncSocket> clientSockets;
         static void Main(string[] args)
         {
             Console.WriteLine("=== Running EchoSync Server ===");
@@ -25,6 +27,7 @@ namespace Server
 
         public Server()
         {
+            clientSockets = new List<EchoSyncSocket>();
             try
             {
                 serverSocket = new EchoSyncSocket();
@@ -56,6 +59,13 @@ namespace Server
                 return;
             }
             Console.WriteLine("Authed as server to client: " + ess.RemoteEndPoint);
+            while (true)
+            {
+                byte[] buffer = new byte[1024];
+                int count = ess.Read(buffer, 0, 1024);
+                String msg = System.Text.Encoding.UTF8.GetString(buffer, 0, count);
+                Console.WriteLine("received from client: " + msg);
+            }
         }
     }
 }

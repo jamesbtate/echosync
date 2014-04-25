@@ -12,13 +12,42 @@ namespace SharedLibrary
     public static class Security
     {
         static RandomNumberGenerator rng = RNGCryptoServiceProvider.Create();
+        // below is an array containing the hash of the GetMachineGUID() for every PC used by James so far
+        //    when developing this application. It is used for authenticating dev computers until a more
+        //    permanent dev environment with a database is set up.
+        public static string[] listOfKnownDevPCs = { "$pbkdf2-sha1$4096$Eg9w4YZVMYYoQ93LomT80A==$FI7ZxkjzOu4JJUV0bOQbMA==" };
 
         public static string HashPasswordBase64(string password)
         {
-            byte[] salt = new byte[16];
+            int iterations = 4096;
+            int passBytes = 16;
+            byte[] salt = new byte[passBytes];
             rng.GetNonZeroBytes(salt);
-            Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, salt, 4096);
-            return System.Convert.ToBase64String(hash.GetBytes(256));
+            Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, salt, iterations);
+            String passString = HashPasswordBase64(password, salt, iterations, passBytes);
+            String saltString = System.Convert.ToBase64String(salt);
+            string returnString = "$pbkdf2-sha1$" + iterations + "$" + saltString + "$" + passString; 
+            return returnString;
+        }
+
+        public static string HashPasswordBase64(string password, byte[] salt, int iterations, int passBytes)
+        {
+            Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, salt, iterations);
+            String passString = System.Convert.ToBase64String(hash.GetBytes(passBytes));
+            return passString;
+        }
+
+        public static bool VerifyPasswordAgainstHash(string password, string base64Hash)
+        {
+            string[] hashParts = base64Hash.Split('$');
+            if (hashParts[1] != "pbkdf2-sha1")
+            {
+                Logger.Error("Found unusual password hash algorithm: " + hashParts[1]);
+                return false;
+            }
+            int iterations = Int32.Parse(hashParts[2]);
+            string passHash = HashPasswordBase64(password, System.Convert.FromBase64String(hashParts[3]), iterations, 16);
+            return passHash.Equals(hashParts[4]);
         }
 
         public static bool ManuallyVerifyCA(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
